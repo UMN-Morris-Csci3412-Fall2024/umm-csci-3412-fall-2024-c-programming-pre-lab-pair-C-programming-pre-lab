@@ -2,6 +2,12 @@
 
 #include "check_whitespace.h"
 
+void validate_trim(const char* source, const char* anticipated) {
+    char* outcome = trim(source);
+    ASSERT_STREQ(anticipated, outcome);
+    free(outcome);
+}
+
 TEST(strip, EmptyString) {
     ASSERT_STREQ("", strip(""));
 }
