@@ -1,30 +1,31 @@
 #include <gtest/gtest.h>
+
 #include "check_whitespace.h"
 
-void validate_trim(const char* source, const char* anticipated) {
-    char* outcome = strip(source);
-    ASSERT_STREQ(anticipated, outcome);
-    free(outcome);
+void assert_stripped_output(const char* original_input, const char* expected_output) {
+    char* stripped_result = strip(original_input);
+    ASSERT_STREQ(expected_output, stripped_result);
+    free(stripped_result);
 }
 
 TEST(strip, EmptyString) {
-    ASSERT_STREQ("", strip(""));
+    assert_stripped_output("", strip(""));
 }
 
 TEST(strip, NoWhitespace) {
-    ASSERT_STREQ("frog", strip("frog"));
+    assert_stripped_output("frog", strip("frog"));
 }
 
 TEST(strip, WhitespaceOnFront) {
-    ASSERT_STREQ("frog", strip("   frog"));
+    assert_stripped_output("frog", strip("   frog"));
 }
 
 TEST(strip, WhitespaceOnBack) {
-    ASSERT_STREQ("frog", strip("frog  "));
+    assert_stripped_output("frog", strip("frog  "));
 }
 
 TEST(strip, WhitespaceOnBothEnds) {
-    ASSERT_STREQ("frog", strip("  frog     "));
+    assert_stripped_output("frog", strip("  frog     "));
 }
 
 TEST(is_clean, EmptyString) {
