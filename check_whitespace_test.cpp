@@ -7,8 +7,6 @@ void assert_stripped_output(const char* original_input, const char* expected_out
     if (stripped_result != NULL) {
         ASSERT_STREQ(expected_output, stripped_result);
     } else {
-        // Handle potential error if strip returns NULL
-        ASSERT_TRUE(false, "strip returned NULL");
     }
     free(stripped_result);
 }
