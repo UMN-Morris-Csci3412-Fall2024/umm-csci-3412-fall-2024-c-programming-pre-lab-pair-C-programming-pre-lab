@@ -27,13 +27,16 @@ char const *strip(char const *str) {
   // If num_spaces >= size then that means that the string
   // consisted of nothing but spaces, so we'll return the
   // empty string.
-  if (num_spaces >= size) {
-    return "";
-  }
+if (num_spaces >= size) {
+    char* empty_result = (char*) calloc(1, sizeof(char)); // Allocate memory for an empty string
+    return empty_result; // Return the empty string
+}
+
 
   // Allocate a slot for all the "saved" characters
   // plus one extra for the null terminator.
-  char* result = (char*) calloc(size-num_spaces+1, sizeof(char));
+  char* result = (char*) calloc(size - num_spaces+1, sizeof(char));
+
 
   // Copy in the "saved" characters.
   int i;
@@ -61,5 +64,7 @@ int is_clean(char const *str) {
   // greater than the second.
   int result = strcmp(str, cleaned);
 
+  // Free the allocated memory
+  free((void*)cleaned);
   return result == 0;
 }
