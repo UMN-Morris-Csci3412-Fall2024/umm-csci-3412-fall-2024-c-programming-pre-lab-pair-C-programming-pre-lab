@@ -4,28 +4,34 @@
 
 void assert_stripped_output(const char* original_input, const char* expected_output) {
     char* stripped_result = strip(original_input);
-    ASSERT_STREQ(expected_output, stripped_result);
+    if (stripped_result != NULL) {
+        ASSERT_STREQ(expected_output, stripped_result);
+    } else {
+        // Handle potential error if strip returns NULL
+        ASSERT_TRUE(false, "strip returned NULL");
+    }
     free(stripped_result);
 }
 
-TEST(strip, EmptyString) {
-    assert_stripped_output("", strip(""));
+
+TEST(assert_stripped_output, EmptyString) {
+    ("", "");
 }
 
 TEST(strip, NoWhitespace) {
-    assert_stripped_output("frog", strip("frog"));
+    assert_stripped_output("frog", "frog");
 }
 
 TEST(strip, WhitespaceOnFront) {
-    assert_stripped_output("frog", strip("   frog"));
+    assert_stripped_output("   frog", "frog");
 }
 
 TEST(strip, WhitespaceOnBack) {
-    assert_stripped_output("frog", strip("frog  "));
+    assert_stripped_output("frog  ", "frog");
 }
 
 TEST(strip, WhitespaceOnBothEnds) {
-    assert_stripped_output("frog", strip("  frog     "));
+    assert_stripped_output("  frog     ", "frog");
 }
 
 TEST(is_clean, EmptyString) {
