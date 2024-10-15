@@ -27,8 +27,11 @@ char const *strip(char const *str) {
   // If num_spaces >= size then that means that the string
   // consisted of nothing but spaces, so we'll return the
   // empty string.
-  if (num_spaces >= size) {
-    return "";
+if (num_spaces >= size) {
+    char* empty_result = (char*) calloc(1, sizeof(char)); // Allocate memory for an empty string
+    return empty_result; // Return the empty string
+}
+
 
   // Allocate a slot for all the "saved" characters
   // plus one extra for the null terminator.
