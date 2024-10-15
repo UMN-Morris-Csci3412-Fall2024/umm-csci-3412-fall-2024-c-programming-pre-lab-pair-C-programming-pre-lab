@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-
 #include "check_whitespace.h"
 
 void validate_trim(const char* source, const char* anticipated) {
